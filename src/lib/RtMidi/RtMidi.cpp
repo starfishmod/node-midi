@@ -1495,7 +1495,7 @@ void MidiInAlsa :: openPort( unsigned int portNumber, const std::string portName
                                       SND_SEQ_PORT_CAP_WRITE |
                                       SND_SEQ_PORT_CAP_SUBS_WRITE );
     snd_seq_port_info_set_type( pinfo,
-                                SND_SEQ_PORT_TYPE_MIDI_GENERIC |
+                               // SND_SEQ_PORT_TYPE_MIDI_GENERIC |
                                 SND_SEQ_PORT_TYPE_APPLICATION );
     snd_seq_port_info_set_midi_channels(pinfo, 16);
 #ifndef AVOID_TIMESTAMPING
@@ -1788,7 +1788,8 @@ void MidiOutAlsa :: openPort( unsigned int portNumber, const std::string portNam
   if ( data->vport < 0 ) {
     data->vport = snd_seq_create_simple_port( data->seq, portName.c_str(),
                                               SND_SEQ_PORT_CAP_READ|SND_SEQ_PORT_CAP_SUBS_READ,
-                                              SND_SEQ_PORT_TYPE_MIDI_GENERIC|SND_SEQ_PORT_TYPE_APPLICATION );
+                                             // SND_SEQ_PORT_TYPE_MIDI_GENERIC|
+					     SND_SEQ_PORT_TYPE_APPLICATION );
     if ( data->vport < 0 ) {
       errorString_ = "MidiOutAlsa::openPort: ALSA error creating output port.";
       error( RtMidiError::DRIVER_ERROR, errorString_ );
