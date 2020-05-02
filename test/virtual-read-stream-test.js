@@ -1,6 +1,6 @@
 var midi = require("../midi.js");
-var virtualInput = new midi.input();
-var output = new midi.output();
+var virtualInput = new midi.Input();
+var output = new midi.Output();
 var assert = require('assert');
 var payload = [144, 23, 81];
 var called = false;
@@ -10,7 +10,7 @@ virtualInput.openVirtualPort("node-midi");
 var reader = midi.createReadStream(virtualInput);
 reader.pipe(process.stdout);
 reader.on('data', function(buffer) {
-  assert.deepEqual(buffer, new Buffer(payload));
+  assert.deepEqual(buffer, new Buffer.from(payload));
   called = true;
 });
 
